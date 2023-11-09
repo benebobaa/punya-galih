@@ -45,7 +45,7 @@ def create_articles():
     submit_id = Helper() 
     db.session.add(submit_id)
     get_id = Helper.query.order_by(Helper.id.desc()).first()
-    submit = Report(title = title, content = content, image_url= 'https://'+request.host + '/report/image/' + str(get_id.id), img=pic.read(), name=filename, mimetype=mimetype)
+    submit = Article(title = title, content = content, image_url= 'https://'+request.host + '/report/image/' + str(get_id.id), img=pic.read(), name=filename, mimetype=mimetype)
     db.session.add(submit)
     db.session.commit()
     return jsonify({'message': 'Article submit success'}), 201
