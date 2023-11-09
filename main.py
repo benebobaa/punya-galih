@@ -34,7 +34,7 @@ with app.app_context():
     db.create_all()
 
 @app.route('/articles', methods=['POST'])
-def create_report(id_user):
+def create_articles():
     title = request.form['title']
     content = request.form['content']
     pic = request.files['image']
