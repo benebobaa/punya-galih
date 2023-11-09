@@ -42,7 +42,7 @@ def create_articles():
         return jsonify({'message': 'No image uploaded'}), 400
     filename = secure_filename(pic.filename)
     mimetype = pic.mimetype
-    submit_id = Helper(date = date) 
+    submit_id = Helper() 
     db.session.add(submit_id)
     get_id = Helper.query.order_by(Helper.id.desc()).first()
     submit = Report(title = title, content = content, image_url= 'https://'+request.host + '/report/image/' + str(get_id.id), img=pic.read(), name=filename, mimetype=mimetype)
