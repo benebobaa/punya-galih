@@ -50,6 +50,15 @@ def create_articles():
     db.session.commit()
     return jsonify({'message': 'Article submit success'}), 201
 
+@app.route('/articles', methods=['GET'])
+def get_articles():
+    reports = Article.query.order_by(desc(Article.id)).all()
+    output = []
+    for report in reports:
+        report_data = {'id': report.id, 'title': report.title, 'content': report.content, 'image_url': report.image_url, 'created_at': report.created_at, 'updated_at': report.updated_at}
+        output.append(report_data)
+    return jsonify({'message':'Success','data': output})
+
 @app.route('/')
 def index():
     return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
