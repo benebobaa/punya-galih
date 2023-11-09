@@ -59,6 +59,13 @@ def get_articles():
         output.append(report_data)
     return jsonify({'message':'Success','data': output})
 
+@app.route('/articles/image/<int:img_id>', methods=['GET'])
+def get_image(img_id):
+    img = Article.query.filter_by(id=img_id).first()
+    if not img:
+        return jsonify({'message': 'Image not found'}), 404
+    return Response( img.img, mimetype=img.mimetype) 
+
 @app.route('/')
 def index():
     return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
