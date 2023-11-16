@@ -76,7 +76,7 @@ def del_admin_report(report_id):
     return jsonify({'message': 'Report deleted successfully!'})
 
 @app.route('/articles/<int:report_id>', methods=['GET'])
-def del_admin_report(report_id):
+def get_by_id(report_id):
     report = Article.query.filter_by(id=report_id).first()
     if not report:
         return jsonify({'message': 'Report not found'}), 404
