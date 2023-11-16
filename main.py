@@ -66,6 +66,22 @@ def get_image(img_id):
         return jsonify({'message': 'Image not found'}), 404
     return Response( img.img, mimetype=img.mimetype) 
 
+@app.route('/articles/<int:report_id>', methods=['DELETE'])
+def del_admin_report(report_id):
+    report = Article.query.filter_by(id=report_id).first()
+    if not report:
+        return jsonify({'message': 'Report not found'}), 404
+    db.session.delete(report)
+    db.session.commit()
+    return jsonify({'message': 'Report deleted successfully!'})
+
+@app.route('/articles/<int:report_id>', methods=['GET'])
+def del_admin_report(report_id):
+    report = Article.query.filter_by(id=report_id).first()
+    if not report:
+        return jsonify({'message': 'Report not found'}), 404
+    return jsonify({'message': 'Success', 'data':report})
+
 @app.route('/')
 def index():
     return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
